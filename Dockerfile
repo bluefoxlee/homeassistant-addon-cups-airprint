@@ -52,8 +52,12 @@ RUN cd /tmp \
 #   drivers/xprinter/printer-driver-xprinter_3.13.55_all.deb
 COPY drivers/xprinter/printer-driver-xprinter_3.13.55_all.deb /tmp/printer-driver-xprinter.deb
 
-RUN apt update \
+RUN echo "Installing XPrinter driver..." \
+  && ls -lh /tmp/printer-driver-xprinter.deb \
+  && apt update \
   && apt install -y --no-install-recommends /tmp/printer-driver-xprinter.deb \
+  && ls -l /usr/lib/cups/filter | grep xprinter \
+  && ls -l /opt/xprinter_printer/printer-driver-xprinter/bin | grep tspl \
   && rm -f /tmp/printer-driver-xprinter.deb \
   && apt clean -y \
   && rm -rf /var/lib/apt/lists/*
