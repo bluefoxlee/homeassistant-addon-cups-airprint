@@ -1,7 +1,7 @@
 name: CUPS
-version: "1.7"
+version: "1.7x"
 slug: cupsik
-description: A CUPS print server with working AirPrint
+description: A CUPS print server with working AirPrint, Add XPrinter for persoanl use
 arch:
   - amd64
   - aarch64
