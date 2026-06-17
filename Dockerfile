@@ -47,6 +47,17 @@ RUN cd /tmp \
   && mv cnijfilter2-6.80-1-deb/packages/cnijfilter2_6.80-1_${ARCH}.deb cnijfilter2_6.80-1.deb \
   && apt install ./cnijfilter2_6.80-1.deb
 
+# Add XPrinter label printer driver
+# Put the original .deb here in your fork:
+#   drivers/xprinter/printer-driver-xprinter_3.13.55_all.deb
+COPY drivers/xprinter/printer-driver-xprinter_3.13.55_all.deb /tmp/printer-driver-xprinter.deb
+
+RUN apt update \
+  && apt install -y --no-install-recommends /tmp/printer-driver-xprinter.deb \
+  && rm -f /tmp/printer-driver-xprinter.deb \
+  && apt clean -y \
+  && rm -rf /var/lib/apt/lists/*
+
 COPY rootfs /
 
 # Add user and disable sudo password checking
